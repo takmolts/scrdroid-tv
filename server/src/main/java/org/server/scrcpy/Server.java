@@ -22,6 +22,9 @@ public final class Server {
             // asynchronous
             startEventController(device, connection, screenEncoder);
 
+            // TV で見ている間はスマホをスリープさせない
+            ScreenPower.startKeepAwake();
+
             try {
                 // synchronous
                 screenEncoder.streamScreen(device, connection.getOutputStream());
@@ -30,6 +33,10 @@ public final class Server {
                 // this is expected on close
                 Ln.d("Screen streaming stopped");
 
+            } finally {
+                ScreenPower.stopKeepAwake();
+                // 消した画面は点け直して終了する
+                ScreenPower.restoreOnExit();
             }
         }
     }
@@ -123,6 +130,12 @@ public final class Server {
             return options;
         }
         options.setAudioEnabled(!"0".equals(args[10]));
+
+        // args[11] : 接続時にスマホの画面を消す (1/0)
+        if (args.length < 12) {
+            return options;
+        }
+        options.setScreenOff("1".equals(args[11]));
 
         return options;
     }

@@ -345,6 +345,11 @@ public class Scrcpy extends Service {
         sendCommand(CommandPacket.CmdType.SCREEN_OFF);
     }
 
+    /** スマホの画面（パネル）を消す/点ける。ミラーリングは続く */
+    public void setRemoteDisplayPower(boolean on) {
+        sendCommand(on ? CommandPacket.CmdType.DISPLAY_POWER_ON : CommandPacket.CmdType.DISPLAY_POWER_OFF);
+    }
+
     private void sendCommand(CommandPacket.CmdType cmdType) {
         if (LetServceRunning.get()) {
             // コマンドキューに追加し、loop() のメインスレッドで送信する（スレッド安全）

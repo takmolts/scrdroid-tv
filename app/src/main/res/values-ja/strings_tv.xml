@@ -25,6 +25,28 @@
     <string name="tv_pair_success">ペアリングしました。接続先に登録しました。</string>
     <string name="tv_pair_failed">ペアリングに失敗しました:\n%1$s</string>
     <string name="tv_menu_hint">≡ でメニュー、戻る2回で切断</string>
+    <string name="tv_switch_screen_off">接続時にスマホの画面を消す（映像は続く）</string>
+    <string name="tv_screen_off_on">スマホの画面を消しました</string>
+    <string name="tv_screen_off_off">スマホの画面を点けました</string>
+    <string name="tv_preset_menu_lock_set">パスワードを設定</string>
+    <string name="tv_preset_menu_lock_change">パスワードを変更</string>
+    <string name="tv_preset_menu_lock_remove">パスワードを解除</string>
+    <string name="tv_lock_type_title">パスワードの種類</string>
+    <string name="tv_lock_type_pin">数字（4〜8桁）</string>
+    <string name="tv_lock_type_dpad">リモコンの方向キー（4〜16回）</string>
+    <string name="tv_lock_enter_title">パスワードを入力</string>
+    <string name="tv_lock_new_title">新しいパスワード</string>
+    <string name="tv_lock_confirm_title">もう一度入力（確認）</string>
+    <string name="tv_lock_pin_hint">数字 4〜8 桁</string>
+    <string name="tv_lock_dpad_help">方向キー（↑↓←→）で入力して、決定ボタンで確定
+≡ボタン: やり直し ／ 戻る: キャンセル</string>
+    <string name="tv_lock_too_short">短すぎます</string>
+    <string name="tv_lock_mismatch">1回目と一致しません。最初からやり直してください</string>
+    <string name="tv_lock_saved">パスワードを設定しました</string>
+    <string name="tv_lock_removed">パスワードを解除しました</string>
+    <string name="tv_lock_wrong">パスワードが違います（残り %1$d 回）</string>
+    <string name="tv_lock_locked_out">入力を %1$d 秒間ロックしています</string>
+    <string name="tv_locked_badge">🔒</string>
     <string-array name="tv_fps_keys">
         <item>制限なし (60)</item>
         <item>45 fps</item>

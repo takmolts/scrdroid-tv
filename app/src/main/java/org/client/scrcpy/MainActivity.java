@@ -116,6 +116,10 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
     private int delayControl;
     private int maxFps = 0;              // 0=制限なし
     private boolean audioEnabled = true; // 音声転送
+    private boolean screenOffOnConnect = false; // 接続時にスマホの画面を消す
+    private boolean remoteDisplayOff = false;   // 現在スマホの画面を消しているか
+    // パスワード入力に成功した接続先（次の1回の接続だけ有効）
+    private String unlockedAddr = null;
     private Context context;
     private String serverAdr = null;
     private SurfaceView surfaceView;
@@ -553,6 +557,10 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
         if (switchAudio != null) {
             switchAudio.setChecked(PreUtils.get(context, Constant.CONTROL_AUDIO, true));
         }
+        final Switch switchScreenOff = findViewById(R.id.switch_screen_off);
+        if (switchScreenOff != null) {
+            switchScreenOff.setChecked(PreUtils.get(context, Constant.CONTROL_SCREEN_OFF, false));
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -855,6 +863,9 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
         final Switch switchAudio = findViewById(R.id.switch_audio);
         audioEnabled = switchAudio == null || switchAudio.isChecked();
         PreUtils.put(context, Constant.CONTROL_AUDIO, audioEnabled);
+        final Switch switchScreenOff = findViewById(R.id.switch_screen_off);
+        screenOffOnConnect = switchScreenOff != null && switchScreenOff.isChecked();
+        PreUtils.put(context, Constant.CONTROL_SCREEN_OFF, screenOffOnConnect);
         final Spinner autoDisconnectSpinner = findViewById(R.id.auto_disconnect_spinner);
         autoDisconnectMinutes = getResources().getIntArray(R.array.options_auto_disconnect_values)[autoDisconnectSpinner.getSelectedItemPosition()];
     }
@@ -1075,8 +1086,15 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
         // 画面OFF（相手デバイスの電源ボタン送信）
         final Button fabScreenOff = findViewById(R.id.fab_screen_off);
         if (fabScreenOff != null) {
+            // スマホの画面（パネル）だけを消す/点ける。スリープはしないので映像は続く
+            fabScreenOff.setText(remoteDisplayOff ? "\uD83D\uDCF1" : getString(R.string.fab_screen_off));
             fabScreenOff.setOnClickListener(v -> {
-                if (scrcpy != null) scrcpy.sendKeyevent(KeyEvent.KEYCODE_POWER);
+                if (scrcpy == null) return;
+                remoteDisplayOff = !remoteDisplayOff;
+                scrcpy.setRemoteDisplayPower(!remoteDisplayOff);
+                fabScreenOff.setText(remoteDisplayOff ? "\uD83D\uDCF1" : getString(R.string.fab_screen_off));
+                Toast.makeText(context, remoteDisplayOff ? R.string.tv_screen_off_on : R.string.tv_screen_off_off,
+                        Toast.LENGTH_SHORT).show();
             });
         }
 
@@ -1649,6 +1667,20 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
     }
 
     private void connectScrcpyServer(String serverAdr) {
+        // 接続時パスワード: 設定されている接続先は、入力に成功してから接続する。
+        // 開始ボタン・一覧・アプリ復帰時の再接続など、すべての経路がここを通る
+        if (!TextUtils.isEmpty(serverAdr)) {
+            final String addr = serverAdr.trim();
+            if (TvLock.isLocked(context, addr) && !addr.equals(unlockedAddr)) {
+                TvLock.requireUnlock(this, addr, () -> {
+                    unlockedAddr = addr;
+                    connectScrcpyServer(addr);
+                });
+                return;
+            }
+        }
+        unlockedAddr = null;  // 1回の接続で使い切る
+        remoteDisplayOff = screenOffOnConnect;
         if (!TextUtils.isEmpty(serverAdr)) {
             resetAutoFollowGuard();  // 新規接続なので振動検知をリセット
             saveHistory(serverAdr);  // 保存到历史记录
@@ -1666,7 +1698,7 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
                         Scrcpy.LOCAL_IP,
                         videoBitrate, Math.max(screenHeight, screenWidth),
                         virtualDisplayMode, virtualDisplayWidth, virtualDisplayHeight, virtualDisplayDpi,
-                        virtualDisplayLaunchPackage, maxFps, audioEnabled);
+                        virtualDisplayLaunchPackage, maxFps, audioEnabled, screenOffOnConnect);
                 if (sendStatus == SendCommands.CmdStatus.SUCCESS) {
                     ThreadUtils.post(() -> {
                         if (!MainActivity.this.isFinishing()) {
@@ -1799,13 +1831,15 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
                         : getLayoutInflater().inflate(R.layout.tv_preset_item, parent, false);
                 String addr = presetItems.get(position);
                 String name = getPresetName(addr);
+                // パスワード付きの接続先には鍵マークを付ける
+                String badge = TvLock.isLocked(context, addr) ? getString(R.string.tv_locked_badge) + " " : "";
                 TextView nameView = view.findViewById(R.id.preset_name);
                 TextView addrView = view.findViewById(R.id.preset_addr);
                 if (TextUtils.isEmpty(name)) {
-                    nameView.setText(addr);
+                    nameView.setText(badge + addr);
                     addrView.setVisibility(View.GONE);
                 } else {
-                    nameView.setText(name);
+                    nameView.setText(badge + name);
                     addrView.setText(addr);
                     addrView.setVisibility(View.VISIBLE);
                 }
@@ -1916,21 +1950,42 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
     /** 決定長押し / ≡キーで出す接続先メニュー */
     private void showPresetMenu(final String addr) {
         String name = getPresetName(addr);
-        CharSequence[] items = {
-                getString(R.string.tv_preset_menu_connect),
-                getString(R.string.tv_preset_menu_edit),
-                getString(R.string.tv_preset_menu_up),
-                getString(R.string.tv_preset_menu_delete)
-        };
+        final boolean locked = TvLock.isLocked(context, addr);
+        List<CharSequence> itemList = new ArrayList<>();
+        itemList.add(getString(R.string.tv_preset_menu_connect));
+        itemList.add(getString(R.string.tv_preset_menu_edit));
+        itemList.add(getString(R.string.tv_preset_menu_up));
+        itemList.add(getString(R.string.tv_preset_menu_delete));
+        itemList.add(getString(locked ? R.string.tv_preset_menu_lock_change : R.string.tv_preset_menu_lock_set));
+        if (locked) {
+            itemList.add(getString(R.string.tv_preset_menu_lock_remove));
+        }
+        CharSequence[] items = itemList.toArray(new CharSequence[0]);
         new AlertDialog.Builder(this)
                 .setTitle(TextUtils.isEmpty(name) ? addr : name + "  (" + addr + ")")
                 .setItems(items, (dialog, which) -> {
                     switch (which) {
                         case 0:
-                            connectToPreset(addr);
+                            connectToPreset(addr);  // パスワード確認は接続処理側で行う
                             break;
                         case 1:
-                            showPresetEditDialog(addr);
+                            TvLock.requireUnlock(this, addr, () -> showPresetEditDialog(addr));
+                            break;
+                        case 4:
+                            // 設定/変更。変更時は現在のパスワードを確認してから
+                            TvLock.requireUnlock(this, addr, () ->
+                                    TvLock.showSetup(this, addr, () -> {
+                                        refreshPresetList();
+                                        focusPreset(addr);
+                                    }));
+                            break;
+                        case 5:
+                            TvLock.requireUnlock(this, addr, () -> {
+                                TvLock.remove(context, addr);
+                                Toast.makeText(context, R.string.tv_lock_removed, Toast.LENGTH_SHORT).show();
+                                refreshPresetList();
+                                focusPreset(addr);
+                            });
                             break;
                         case 2:
                             saveHistory(addr);  // 先頭へ移動
@@ -1938,12 +1993,13 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
                             focusPreset(addr);
                             break;
                         case 3:
-                            new AlertDialog.Builder(this)
+                            TvLock.requireUnlock(this, addr, () -> new AlertDialog.Builder(this)
                                     .setTitle(TextUtils.isEmpty(name) ? addr : name)
                                     .setMessage(R.string.tv_delete_confirm)
                                     .setPositiveButton(android.R.string.ok, (d, w) -> {
                                         removeHistoryItem(addr);
                                         setPresetName(addr, null);
+                                        TvLock.remove(context, addr);
                                         if (addr.equals(PreUtils.get(context, Constant.CONTROL_REMOTE_ADDR, ""))) {
                                             PreUtils.put(context, Constant.CONTROL_REMOTE_ADDR, "");
                                         }
@@ -1957,7 +2013,7 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
                                         }
                                     })
                                     .setNegativeButton(android.R.string.cancel, null)
-                                    .show();
+                                    .show());
                             break;
                         default:
                             break;
@@ -2018,6 +2074,7 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
                 updateHistoryItem(existing, newAddr);
                 if (!existing.equals(newAddr)) {
                     setPresetName(existing, null);
+                    TvLock.rename(context, existing, newAddr);  // パスワードも引き継ぐ
                 }
                 if (existing.equals(PreUtils.get(context, Constant.CONTROL_REMOTE_ADDR, ""))) {
                     PreUtils.put(context, Constant.CONTROL_REMOTE_ADDR, newAddr);

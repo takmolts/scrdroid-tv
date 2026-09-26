@@ -125,13 +125,14 @@ public class SendCommands {
                                      boolean virtualDisplayMode, int virtualWidth, int virtualHeight, int virtualDpi,
                                      String virtualLaunchPackage) {
         return this.SendAdbCommands(context, fileBase64, ip, port, forwardport, localip, bitrate, size,
-                virtualDisplayMode, virtualWidth, virtualHeight, virtualDpi, virtualLaunchPackage, 0, true);
+                virtualDisplayMode, virtualWidth, virtualHeight, virtualDpi, virtualLaunchPackage, 0, true, false);
     }
 
     public CmdStatus SendAdbCommands(Context context, final byte[] fileBase64, final String ip, int port, int forwardport, String localip,
                                      int bitrate, int size,
                                      boolean virtualDisplayMode, int virtualWidth, int virtualHeight, int virtualDpi,
-                                     String virtualLaunchPackage, int maxFps, boolean audioEnabled) {
+                                     String virtualLaunchPackage, int maxFps, boolean audioEnabled,
+                                     boolean screenOff) {
         AtomicReference<CmdStatus> status = new AtomicReference<>(CmdStatus.RUNNING);
         // サーバ側で必要な追加引数:
         //   tunnelForward (既存4つ目): 既定 false
@@ -140,6 +141,7 @@ public class SendCommands {
         //   virtualLaunchPackage (9つ目): "-"=ホーム/ランチャー
         //   maxFps (10個目): 0=制限なし
         //   audioEnabled (11個目): 1/0
+        //   screenOff (12個目): 1/0
         // 空・null の場合は "-"（ホーム）として送る。shell の語分割で消えないよう非空トークンにする。
         String launchArg = (virtualLaunchPackage == null || virtualLaunchPackage.trim().isEmpty())
                 ? "-"
@@ -161,7 +163,8 @@ public class SendCommands {
                 Integer.toString(virtualDpi),
                 launchArg,
                 Integer.toString(Math.max(maxFps, 0)),   // 10個目: 最大fps (0=制限なし)
-                (audioEnabled ? "1" : "0") + ";"          // 11個目: 音声転送
+                audioEnabled ? "1" : "0",                 // 11個目: 音声転送
+                (screenOff ? "1" : "0") + ";"             // 12個目: 接続時にスマホの画面を消す
         };
         ThreadUtils.execute(() -> {
             try {

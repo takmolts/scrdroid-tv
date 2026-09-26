@@ -202,6 +202,12 @@
                         style="@style/TvSettingSwitch"
                         android:text="@string/tv_switch_audio" />
 
+                    <!-- 接続時にスマホの画面を消す（ミラーリングは続く） -->
+                    <Switch
+                        android:id="@+id/switch_screen_off"
+                        style="@style/TvSettingSwitch"
+                        android:text="@string/tv_switch_screen_off" />
+
                     <!-- 自動切断 -->
                     <LinearLayout style="@style/TvSettingRow">
                         <TextView

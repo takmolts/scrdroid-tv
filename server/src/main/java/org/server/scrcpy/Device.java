@@ -25,6 +25,8 @@ public final class Device {
             public void onRotationChanged(int rotation) throws RemoteException {
                 synchronized (Device.this) {
                     screenInfo = screenInfo.withRotation(rotation);
+                    // 回転で画面が点き直す機種があるため、OFF 要求中なら消し直す
+                    ScreenPower.reapplyIfNeeded();
 
                     // notify
                     if (rotationListener != null) {

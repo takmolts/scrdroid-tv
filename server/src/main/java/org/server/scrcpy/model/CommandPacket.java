@@ -75,7 +75,9 @@ public class CommandPacket extends MediaPacket<CommandPacket> {
     public enum CmdType {
 
         JSON_EXTRA_CMD((byte) 0), VIDEO_NEW_KEY_FRAME((byte) 1),
-        SCREEN_ON((byte) 2), SCREEN_OFF((byte) 3);
+        SCREEN_ON((byte) 2), SCREEN_OFF((byte) 3),
+        // パネルの電源だけを切る/入れる（スマホはスリープしない）
+        DISPLAY_POWER_OFF((byte) 4), DISPLAY_POWER_ON((byte) 5);
 
         private byte type;
 

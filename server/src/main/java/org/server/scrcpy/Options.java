@@ -19,6 +19,16 @@ public class Options {
     private int maxFps;
     // 音声転送の有無
     private boolean audioEnabled = true;
+    // 接続時にスマホの画面（パネル）を消すか
+    private boolean screenOff;
+
+    public boolean isScreenOff() {
+        return screenOff;
+    }
+
+    public void setScreenOff(boolean screenOff) {
+        this.screenOff = screenOff;
+    }
 
     public int getMaxFps() {
         return maxFps;

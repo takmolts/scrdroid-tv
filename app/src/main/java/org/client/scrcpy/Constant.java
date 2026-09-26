@@ -31,5 +31,6 @@ public class Constant {
     public static final String PRESET_NAMES_KEY = "preset_names_key";
     public static final String PREFERENCE_SPINNER_MAX_FPS = "spinner_max_fps";
     public static final String CONTROL_AUDIO = "audio_enabled";
+    public static final String CONTROL_SCREEN_OFF = "screen_off_on_connect";
 
 }

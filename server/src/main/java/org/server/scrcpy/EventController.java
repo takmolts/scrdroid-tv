@@ -156,12 +156,35 @@ public class EventController {
                     injectKeycode(KeyEvent.KEYCODE_POWER);
                 }
                 break;
+            case DISPLAY_POWER_OFF:
+                // パネルだけ消す（スマホは起きたまま、ミラーリング継続）
+                ScreenPower.setDisplayPower(false);
+                break;
+            case DISPLAY_POWER_ON:
+                ScreenPower.setDisplayPower(true);
+                break;
         }
     }
 
     public void control() throws IOException {
         // on start, turn screen on
         turnScreenOn();
+
+        // 接続オプション: スマホの画面を消す。
+        // 画面点灯直後だと電源管理側に上書きされることがあるので少し待ってから行う
+        if (device.getOptions() != null && device.getOptions().isScreenOff()) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(800);
+                    } catch (InterruptedException ignore) {
+                        return;
+                    }
+                    ScreenPower.setDisplayPower(false);
+                }
+            }, "screen-off").start();
+        }
 
         while (true) {
             //           handleEvent();

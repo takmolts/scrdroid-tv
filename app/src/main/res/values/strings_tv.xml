@@ -25,6 +25,28 @@
     <string name="tv_pair_success">Paired. Connection saved.</string>
     <string name="tv_pair_failed">Pairing failed:\n%1$s</string>
     <string name="tv_menu_hint">Press ≡ for the menu, Back twice to disconnect</string>
+    <string name="tv_switch_screen_off">Turn phone screen off on connect (mirroring continues)</string>
+    <string name="tv_screen_off_on">Phone screen turned off</string>
+    <string name="tv_screen_off_off">Phone screen turned on</string>
+    <string name="tv_preset_menu_lock_set">Set password</string>
+    <string name="tv_preset_menu_lock_change">Change password</string>
+    <string name="tv_preset_menu_lock_remove">Remove password</string>
+    <string name="tv_lock_type_title">Password type</string>
+    <string name="tv_lock_type_pin">Digits (4–8)</string>
+    <string name="tv_lock_type_dpad">Remote D-pad directions (4–16)</string>
+    <string name="tv_lock_enter_title">Enter password</string>
+    <string name="tv_lock_new_title">New password</string>
+    <string name="tv_lock_confirm_title">Enter again to confirm</string>
+    <string name="tv_lock_pin_hint">4–8 digits</string>
+    <string name="tv_lock_dpad_help">Press ↑↓←→, then OK to confirm
+≡: start over / Back: cancel</string>
+    <string name="tv_lock_too_short">Too short</string>
+    <string name="tv_lock_mismatch">Does not match. Please start over.</string>
+    <string name="tv_lock_saved">Password set</string>
+    <string name="tv_lock_removed">Password removed</string>
+    <string name="tv_lock_wrong">Wrong password (%1$d tries left)</string>
+    <string name="tv_lock_locked_out">Input locked for %1$d seconds</string>
+    <string name="tv_locked_badge">🔒</string>
     <string-array name="tv_fps_keys">
         <item>Unlimited (60)</item>
         <item>45 fps</item>
