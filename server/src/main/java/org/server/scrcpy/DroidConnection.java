@@ -28,7 +28,10 @@ public final class DroidConnection implements Closeable {
         this.socket = socket;
 
         inputStream = new DataInputStream(socket.getInputStream());
-        outputStream = socket.getOutputStream();
+        // 映像スレッドと音声スレッドが同じソケットへ書き込むため、パケット単位で排他する。
+        // 排他しないと大きなキーフレーム（画面回転の直後など）の途中に音声パケットが割り込み、
+        // ストリームが壊れてクライアント側で切断扱いになる
+        outputStream = new SyncOutputStream(socket.getOutputStream());
     }
 
 

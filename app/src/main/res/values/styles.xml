@@ -1,7 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.DeviceDefault.Light.NoActionBar">
+    <!-- Fire TV 版: 暗い背景に合わせてダークテーマにする（ダイアログの文字が黒くならないように） -->
+    <style name="AppTheme" parent="android:Theme.Material.NoActionBar">
+        <item name="android:alertDialogTheme">@style/TvDialog</item>
+        <item name="android:colorAccent" tools:ignore="NewApi">#3C93F0</item>
         <!-- Customize your theme here. -->
         <!--        <item name="android:textColor">@color/white</item>-->
         <item name="android:textColorHint">#A8AAB5</item>
@@ -57,5 +60,16 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">15sp</item>
         <item name="android:focusable">true</item>
+    </style>
+
+    <!-- ダイアログ（接続先の編集・パスワード入力・設定の選択肢など）: 濃いグレー地に白文字 -->
+    <style name="TvDialog" parent="android:Theme.Material.Dialog.Alert">
+        <item name="android:colorBackground">#2A2E36</item>
+        <item name="android:colorAccent">#5AA8FF</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#C8CAD5</item>
+        <item name="android:textColorHint">#8A8C95</item>
+        <item name="android:colorControlNormal">#C8CAD5</item>
+        <item name="android:colorControlActivated">#5AA8FF</item>
     </style>
 </resources>
