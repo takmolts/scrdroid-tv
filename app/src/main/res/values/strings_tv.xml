@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tv_hint_keys">OK: connect  /  Long-press OK or ≡: edit  /  ≡ while mirroring: menu</string>
+    <string name="tv_presets_title">Connections</string>
+    <string name="tv_presets_empty">No connections yet.\nAdd your phone with \"+ Add\".</string>
+    <string name="tv_add_preset">+ Add</string>
+    <string name="tv_pair">Pair (Android 11+)</string>
+    <string name="tv_settings_title">Video / audio</string>
+    <string name="tv_label_max_fps">Max frame rate</string>
+    <string name="tv_switch_audio">Forward audio (phone: Android 11+)</string>
+    <string name="tv_label_name">Name (optional)</string>
+    <string name="tv_hint_name">e.g. My phone</string>
+    <string name="tv_preset_menu_connect">Connect</string>
+    <string name="tv_preset_menu_edit">Edit</string>
+    <string name="tv_preset_menu_delete">Delete</string>
+    <string name="tv_preset_menu_up">Move to top</string>
+    <string name="tv_delete_confirm">Delete this connection?</string>
+    <string name="tv_select_preset_first">Select a connection first.</string>
+    <string name="tv_pair_title">Pair with wireless debugging</string>
+    <string name="tv_pair_desc">On the phone: Developer options → Wireless debugging → \"Pair device with pairing code\". Enter the IP:port and 6-digit code shown there.</string>
+    <string name="tv_label_pair_port">Pairing port</string>
+    <string name="tv_label_pair_code">Pairing code (6 digits)</string>
+    <string name="tv_label_connect_port">Connection port (shown on the Wireless debugging screen)</string>
+    <string name="tv_pairing">Pairing…</string>
+    <string name="tv_pair_success">Paired. Connection saved.</string>
+    <string name="tv_pair_failed">Pairing failed:\n%1$s</string>
+    <string name="tv_menu_hint">Press ≡ for the menu, Back twice to disconnect</string>
+    <string-array name="tv_fps_keys">
+        <item>Unlimited (60)</item>
+        <item>45 fps</item>
+        <item>30 fps</item>
+        <item>24 fps</item>
+        <item>15 fps</item>
+    </string-array>
+    <string-array name="tv_delay_keys">
+        <item>Lowest (30 ms)</item>
+        <item>Low (60 ms)</item>
+        <item>Medium (100 ms)</item>
+        <item>Stable (200 ms)</item>
+    </string-array>
+</resources>

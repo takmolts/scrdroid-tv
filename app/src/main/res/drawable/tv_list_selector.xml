@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 接続先リストの選択中(フォーカス中)の行 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#3C93F0" />
+    <corners android:radius="6dp" />
+    <stroke android:width="2dp" android:color="#FFFFFF" />
+</shape>

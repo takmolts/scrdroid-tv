@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- タイルの塗り -->
+    <solid android:color="#4A4E5A" />
+    <corners android:radius="6dp" />
+    <!-- 押す場所の境目を分かるようにする枠線 -->
+    <stroke
+        android:width="1dp"
+        android:color="#7A8090" />
+</shape>

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">scrdroid TV</string>
+  <string name="label_server_ip">リモートデバイス IP アドレス</string>
+  <string name="label_video_resolution">解像度</string>
+  <string name="delay_control">遅延コントロール</string>
+  <string name="auto_disconnect">自動切断</string>
+  <string-array name="options_auto_disconnect_keys">
+    <item>無制限</item>
+    <item>5分</item>
+    <item>10分</item>
+    <item>30分</item>
+    <item>60分</item>
+    <item>120分</item>
+  </string-array>
+  <string name="label_video_bitrate">ビットレート</string>
+  <string name="label_x">x</string>
+  <string name="action_start">開始</string>
+  <string name="server_add_title">接続先を追加</string>
+  <string name="server_edit_title">接続先を編集</string>
+  <string name="label_ip_addr">IPアドレス</string>
+  <string name="label_port">ポート（省略時 5555）</string>
+  <string name="error_ip_empty">IPアドレスを入力してください</string>
+  <string name="error_port_invalid">ポート番号が不正です</string>
+  <string name="action_help">ヘルプ</string>
+  <string name="appswitch_button">=</string>
+  <string name="home_button">o</string>
+  <string name="back_button">\u003C</string>
+  <string name="switch0">ビューイングモード (コントロールなし)</string>
+  <string name="switch1">下部のコントロールボタン (戻るボタン)</string>
+  <string name="switch_force_portrait">強制縦画面表示</string>
+  <string name="switch_virtual_display">仮想ディスプレイモード (拡張・独立画面)</string>
+  <string name="hint_virtual_launch_package">起動するアプリのパッケージ名 (空欄=ホーム)</string>
+  <string name="select_app_button">選択</string>
+  <string name="select_app_dialog_title">対象端末のアプリを選択</string>
+  <string name="select_app_loading">対象端末からアプリ一覧を取得中…</string>
+  <string name="select_app_empty">アプリ一覧を取得できませんでした。接続先アドレスと接続状態を確認してください。</string>
+  <string name="select_app_search_hint">検索</string>
+  <string name="select_app_home_item">(ホーム / ランチャー)</string>
+  <string name="select_app_no_host">先に接続先アドレスを入力してください。</string>
+  <string name="screen_control">接続時の画面</string>
+  <string-array name="options_screen_control_keys">
+    <item>何もしない</item>
+    <item>ONにする</item>
+    <item>OFFにする</item>
+  </string-array>
+  <string name="fab_disconnect">&#x2716;</string>
+  <string name="fab_mute_on">&#x1F507;</string>
+  <string name="fab_mute_off">&#x1F50A;</string>
+  <string name="fab_screen_off">&#x1F4F4;</string>
+  <string name="fab_orientation_auto">自</string>
+  <string name="fab_orientation_portrait">縦</string>
+  <string name="fab_orientation_landscape">横</string>
+  <string name="connect_tips">ヒント: デバイスでワイヤレスデバッグを有効化する必要があります。\n\t\tadb ポートコマンドのリセット: adb tcpip 5555</string>
+  <string name="please_wait">接続中 …</string>
+  <string name="connect_faild">接続に失敗しました</string>
+  <string name="connect_faild_ask">接続を再試行しますか？</string>
+  <string name="disconnect">切断</string>
+  <string name="disconnect_ask">接続が切断されたことを検出しました。終了して再接続してください。</string>
+  <string name="need_register">登録が必要です</string>
+  <string-array name="options_resolution_values">
+    <item>1920x1080</item>
+    <item>1600x720</item>
+    <item>1280x720</item>
+    <item>1200x540</item>
+    <item>960x720</item>
+    <item>800x448</item>
+    <item>640x360</item>
+  </string-array>
+  <string-array name="options_delay_keys">
+    <item>高 (100 ミリ秒)</item>
+    <item>中 (60 ミリ秒)</item>
+    <item>低 (30 ミリ秒)</item>
+  </string-array>
+  <integer-array name="options_delay_values">
+    <item>100</item>
+    <item>60</item>
+    <item>30</item>
+  </integer-array>
+  <string-array name="options_bitrate_keys">
+    <item>6 Mbps</item>
+    <item>4 Mbps</item>
+    <item>2 Mbps</item>
+    <item>1 Mbps</item>
+  </string-array>
+  <integer-array name="options_bitrate_values">
+    <item>6144000</item>
+    <item>4096000</item>
+    <item>2048000</item>
+    <item>1024000</item>
+  </integer-array>
+</resources>

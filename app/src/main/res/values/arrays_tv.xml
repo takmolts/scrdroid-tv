@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fire TV 版の設定値（表示名は strings_tv.xml 側で言語別に定義） -->
+<resources>
+    <!-- 解像度: 長辺の最大ピクセル数（"高さx幅" 形式は既存コード互換） -->
+    <string-array name="tv_resolution_values" translatable="false">
+        <item>1920x1080</item>
+        <item>1600x900</item>
+        <item>1280x720</item>
+        <item>1024x576</item>
+        <item>800x448</item>
+    </string-array>
+    <string-array name="tv_resolution_keys" translatable="false">
+        <item>1920 (1080p)</item>
+        <item>1600 (900p)</item>
+        <item>1280 (720p)</item>
+        <item>1024 (576p)</item>
+        <item>800 (448p)</item>
+    </string-array>
+
+    <integer-array name="tv_bitrate_values">
+        <item>16000000</item>
+        <item>12000000</item>
+        <item>8000000</item>
+        <item>6000000</item>
+        <item>4000000</item>
+        <item>2000000</item>
+        <item>1000000</item>
+    </integer-array>
+    <string-array name="tv_bitrate_keys" translatable="false">
+        <item>16 Mbps</item>
+        <item>12 Mbps</item>
+        <item>8 Mbps</item>
+        <item>6 Mbps</item>
+        <item>4 Mbps</item>
+        <item>2 Mbps</item>
+        <item>1 Mbps</item>
+    </string-array>
+
+    <!-- 0 = 制限なし（スマホ側の最大 60fps） -->
+    <integer-array name="tv_fps_values">
+        <item>0</item>
+        <item>45</item>
+        <item>30</item>
+        <item>24</item>
+        <item>15</item>
+    </integer-array>
+
+    <!-- 遅延許容値(ms)。これより遅れて届いたフレームは表示せず捨てる -->
+    <integer-array name="tv_delay_values">
+        <item>30</item>
+        <item>60</item>
+        <item>100</item>
+        <item>200</item>
+    </integer-array>
+</resources>

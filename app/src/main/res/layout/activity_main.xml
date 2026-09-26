@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Fire TV 向けメイン画面（横画面・リモコン操作前提）
+  左: 接続先プリセット一覧 / 右: 映像・音声設定と開始ボタン
+  既存コードが参照する ID（editText_server_host / history_list / switch0 など）は
+  非表示で残している。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1D2228"
+    android:orientation="vertical"
+    android:paddingLeft="48dp"
+    android:paddingTop="27dp"
+    android:paddingRight="48dp"
+    android:paddingBottom="20dp"
+    tools:context=".MainActivity">
+
+    <!-- ヘッダー -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/version_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textColor="#80FFFFFF"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_hint_keys"
+            android:textColor="#A8AAB5"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <!-- ===== 左: 接続先プリセット ===== -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_presets_title"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <ListView
+                android:id="@+id/preset_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:choiceMode="none"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="6dp"
+                android:drawSelectorOnTop="false"
+                android:listSelector="@drawable/tv_list_selector"
+                android:nextFocusRight="@+id/spinner_video_resolution" />
+
+            <TextView
+                android:id="@+id/preset_empty"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/tv_presets_empty"
+                android:textColor="#A8AAB5"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_add_preset"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/tv_focus_bg"
+                    android:focusable="true"
+                    android:text="@string/tv_add_preset"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/button_pair"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/tv_focus_bg"
+                    android:focusable="true"
+                    android:text="@string/tv_pair"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ===== 右: 設定 ===== -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_settings_title"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <ScrollView
+                android:id="@+id/main_scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- 解像度 -->
+                    <LinearLayout style="@style/TvSettingRow">
+                        <TextView
+                            style="@style/TvSettingLabel"
+                            android:text="@string/label_video_resolution" />
+                        <Spinner
+                            android:id="@+id/spinner_video_resolution"
+                            style="@style/TvSettingSpinner" />
+                    </LinearLayout>
+
+                    <!-- ビットレート -->
+                    <LinearLayout style="@style/TvSettingRow">
+                        <TextView
+                            style="@style/TvSettingLabel"
+                            android:text="@string/label_video_bitrate" />
+                        <Spinner
+                            android:id="@+id/spinner_video_bitrate"
+                            style="@style/TvSettingSpinner" />
+                    </LinearLayout>
+
+                    <!-- 最大fps -->
+                    <LinearLayout style="@style/TvSettingRow">
+                        <TextView
+                            style="@style/TvSettingLabel"
+                            android:text="@string/tv_label_max_fps" />
+                        <Spinner
+                            android:id="@+id/spinner_max_fps"
+                            style="@style/TvSettingSpinner" />
+                    </LinearLayout>
+
+                    <!-- 遅延コントロール（これより遅れたフレームは捨てる） -->
+                    <LinearLayout style="@style/TvSettingRow">
+                        <TextView
+                            style="@style/TvSettingLabel"
+                            android:text="@string/delay_control" />
+                        <Spinner
+                            android:id="@+id/delay_control_spinner"
+                            style="@style/TvSettingSpinner" />
+                    </LinearLayout>
+
+                    <!-- 音声転送 -->
+                    <Switch
+                        android:id="@+id/switch_audio"
+                        style="@style/TvSettingSwitch"
+                        android:text="@string/tv_switch_audio" />
+
+                    <!-- 自動切断 -->
+                    <LinearLayout style="@style/TvSettingRow">
+                        <TextView
+                            style="@style/TvSettingLabel"
+                            android:text="@string/auto_disconnect" />
+                        <Spinner
+                            android:id="@+id/auto_disconnect_spinner"
+                            style="@style/TvSettingSpinner" />
+                    </LinearLayout>
+
+                    <!-- 仮想ディスプレイ（スマホ側の画面とは別の画面を映す） -->
+                    <Switch
+                        android:id="@+id/switch_virtual_display"
+                        style="@style/TvSettingSwitch"
+                        android:text="@string/switch_virtual_display" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edit_virtual_launch_package"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/tv_focus_bg"
+                            android:gravity="center_vertical"
+                            android:hint="@string/hint_virtual_launch_package"
+                            android:importantForAutofill="no"
+                            android:inputType="textNoSuggestions"
+                            android:maxLines="1"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="12dp"
+                            android:textColor="@color/white"
+                            android:textColorHint="#8A8A8A"
+                            android:textSize="14sp" />
+
+                        <Button
+                            android:id="@+id/button_select_app"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:background="@drawable/tv_focus_bg"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@string/select_app_button"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/button_help"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/tv_focus_bg"
+                        android:text="@string/action_help"
+                        android:textColor="#C0FFFFFF"
+                        android:textSize="14sp" />
+
+                    <!-- ===== 以下は既存コード互換のため非表示で残すビュー ===== -->
+                    <EditText
+                        android:id="@+id/editText_server_host"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:visibility="gone"
+                        tools:ignore="LabelFor" />
+
+                    <FrameLayout
+                        android:id="@+id/history_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <FrameLayout
+                        android:id="@+id/button_add_server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <!-- TV にはタッチが無いので操作転送は使わない（ビューイング相当） -->
+                    <Switch
+                        android:id="@+id/switch0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <Switch
+                        android:id="@+id/switch_force_portrait"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- 開始ボタン -->
+            <Button
+                android:id="@+id/button_start"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/tv_start_bg"
+                android:text="@string/action_start"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

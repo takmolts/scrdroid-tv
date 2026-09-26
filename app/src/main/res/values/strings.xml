@@ -1,0 +1,127 @@
+<resources>
+    <string name="app_name">scrdroid TV</string>
+
+    <string name="label_server_ip">Remote Device IP address</string>
+    <string name="label_video_resolution">Resolution</string>
+    <string name="delay_control">Delay Control</string>
+    <string name="auto_disconnect">Auto Disconnect</string>
+    <string name="label_video_bitrate">Bitrate</string>
+    <string name="label_x">x</string>
+    <string name="action_start">Start</string>
+    <string name="server_add_title">Add connection</string>
+    <string name="server_edit_title">Edit connection</string>
+    <string name="label_ip_addr">IP address</string>
+    <string name="label_port">Port (default 5555)</string>
+    <string name="error_ip_empty">Enter an IP address</string>
+    <string name="error_port_invalid">Invalid port number</string>
+    <string name="server_add_icon">＋</string>
+    <string name="history_edit_icon">&#x270E;</string>
+    <string name="history_delete_icon">&#x2715;</string>
+    <string name="action_help">Help</string>
+    <string name="appswitch_button">=</string>
+    <string name="home_button">o</string>
+    <string name="back_button">\u003C</string>
+    <string name="switch_force_portrait">Force portrait (lock vertical display)</string>
+    <string name="switch_virtual_display">Virtual display mode (extend, independent screen)</string>
+    <string name="hint_virtual_launch_package">App package to launch (blank = home/launcher)</string>
+    <string name="select_app_button">Select</string>
+    <string name="select_app_dialog_title">Select an app on the target</string>
+    <string name="select_app_loading">Fetching app list from target…</string>
+    <string name="select_app_empty">Could not get app list. Check the target address and connection.</string>
+    <string name="select_app_search_hint">Search</string>
+    <string name="select_app_home_item">(Home / launcher)</string>
+    <string name="select_app_no_host">Enter the target address first.</string>
+    <string name="screen_control">Screen on connect</string>
+    <string-array name="options_screen_control_keys">
+        <item>No action</item>
+        <item>Turn ON</item>
+        <item>Turn OFF</item>
+    </string-array>
+    <string name="fab_menu_icon">&#x2699;</string>
+    <string name="fab_disconnect">&#x2716;</string>
+    <string name="fab_mute_on">&#x1F507;</string>
+    <string name="fab_mute_off">&#x1F50A;</string>
+    <string name="fab_screen_off">&#x1F4F4;</string>
+    <string name="fab_orientation_auto">自</string>
+    <string name="fab_orientation_portrait">縦</string>
+    <string name="fab_orientation_landscape">横</string>
+    <string name="fab_back">&#x25C1;</string>
+    <string name="fab_home">&#x25CB;</string>
+    <string name="fab_appswitch">&#x25A1;</string>
+    <string name="fab_keypad">&#x2328;</string>
+    <string name="keypad_wake">&#x1F506;</string>
+    <string name="keypad_unlock">&#x1F513;</string>
+    <string name="keypad_del">&#x232B;</string>
+    <string name="keypad_enter">&#x23CE;</string>
+    <string name="keypad_close">&#x2715;</string>
+    <string name="switch0">Viewing mode (no control)</string>
+    <string name="switch1">Bottom control button (back button)</string>
+
+    <string name="connect_tips">Tips: You need to enable wireless debugging on your phone\n\t\tReset adb port command: adb tcpip 5555</string>
+    <string name="please_wait">Connecting …</string>
+
+    <string name="connect_faild">Connection failed</string>
+    <string name="connect_faild_ask">Do you want to retry the connection?</string>
+
+    <string name="disconnect">Disconnect</string>
+    <string name="disconnect_ask">The connection is detected to be disconnected, please exit and reconnect</string>
+
+    <string name="need_register">Registration required</string>
+
+    <string-array name="options_resolution_values">
+        <item>1920x1080</item>
+        <item>1600x720</item>
+        <item>1280x720</item>
+        <item>1200x540</item>
+        <item>960x720</item>
+        <item>800x448</item>
+        <item>640x360</item>
+    </string-array>
+
+    <string-array name="options_delay_keys">
+        <item>Hight (100ms)</item>
+        <item>Medium (60ms)</item>
+        <item>Low (30ms)</item>
+    </string-array>
+
+    <integer-array name="options_delay_values">
+        <item>100</item>
+        <item>60</item>
+        <item>30</item>
+    </integer-array>
+
+    <string-array name="options_bitrate_keys">
+        <item>6 Mbps</item>
+        <item>4 Mbps</item>
+        <item>2 Mbps</item>
+        <item>1 Mbps</item>
+    </string-array>
+
+    <string-array name="options_auto_disconnect_keys">
+        <item>Unlimited</item>
+        <item>5 min</item>
+        <item>10 min</item>
+        <item>30 min</item>
+        <item>60 min</item>
+        <item>120 min</item>
+    </string-array>
+
+    <integer-array name="options_auto_disconnect_values">
+        <item>0</item>
+        <item>5</item>
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+    </integer-array>
+
+    <integer-array name="options_bitrate_values">
+        <item>6144000</item>
+        <item>4096000</item>
+        <item>2048000</item>
+        <item>1024000</item>
+    </integer-array>
+
+</resources>
+
+

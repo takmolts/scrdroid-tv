@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 接続先の追加・編集（名前 / IP / ポート） -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="24dp"
+    android:paddingTop="12dp"
+    android:paddingRight="24dp"
+    android:paddingBottom="4dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_label_name"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/edit_preset_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/tv_hint_name"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:singleLine="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_ip_addr"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/edit_server_ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="192.168.0.10"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:singleLine="true"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_port"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/edit_server_port"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="5555"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:singleLine="true"
+        tools:ignore="HardcodedText" />
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tv_hint_keys">決定: 接続 ／ 決定長押し・≡: 編集 ／ ミラーリング中の≡: メニュー</string>
+    <string name="tv_presets_title">接続先</string>
+    <string name="tv_presets_empty">接続先がありません。\n「＋ 追加」からスマホを登録してください。</string>
+    <string name="tv_add_preset">＋ 追加</string>
+    <string name="tv_pair">ペアリング (Android 11+)</string>
+    <string name="tv_settings_title">映像・音声</string>
+    <string name="tv_label_max_fps">最大フレームレート</string>
+    <string name="tv_switch_audio">音声も転送する（スマホ側 Android 11 以上）</string>
+    <string name="tv_label_name">名前（省略可）</string>
+    <string name="tv_hint_name">例: 自分のスマホ</string>
+    <string name="tv_preset_menu_connect">接続</string>
+    <string name="tv_preset_menu_edit">編集</string>
+    <string name="tv_preset_menu_delete">削除</string>
+    <string name="tv_preset_menu_up">先頭へ移動</string>
+    <string name="tv_delete_confirm">この接続先を削除しますか？</string>
+    <string name="tv_select_preset_first">先に接続先を選んでください。</string>
+    <string name="tv_pair_title">ワイヤレスデバッグでペアリング</string>
+    <string name="tv_pair_desc">スマホで 開発者向けオプション → ワイヤレスデバッグ →「ペア設定コードによるデバイスのペア設定」を開き、表示された IP・ポート・6桁のコードを入力してください。</string>
+    <string name="tv_label_pair_port">ペアリング用ポート</string>
+    <string name="tv_label_pair_code">ペア設定コード（6桁）</string>
+    <string name="tv_label_connect_port">接続用ポート（ワイヤレスデバッグ画面の「IPアドレスとポート」）</string>
+    <string name="tv_pairing">ペアリング中…</string>
+    <string name="tv_pair_success">ペアリングしました。接続先に登録しました。</string>
+    <string name="tv_pair_failed">ペアリングに失敗しました:\n%1$s</string>
+    <string name="tv_menu_hint">≡ でメニュー、戻る2回で切断</string>
+    <string-array name="tv_fps_keys">
+        <item>制限なし (60)</item>
+        <item>45 fps</item>
+        <item>30 fps</item>
+        <item>24 fps</item>
+        <item>15 fps</item>
+    </string-array>
+    <string-array name="tv_delay_keys">
+        <item>最小 (30 ms)</item>
+        <item>低 (60 ms)</item>
+        <item>中 (100 ms)</item>
+        <item>安定 (200 ms)</item>
+    </string-array>
+</resources>

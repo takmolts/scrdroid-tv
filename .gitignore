@@ -1,0 +1,27 @@
+# Build outputs
+.gradle/
+build/
+app/build/
+server/build/
+
+# IDE
+.idea/
+*.iml
+
+# Local config
+local.properties
+
+# Signing keys (絶対にコミットしない)
+*.jks
+*.keystore
+keystore.properties
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code
+.claude/
+
+# Misc
+image.png

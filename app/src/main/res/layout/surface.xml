@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark">
+
+    <LinearLayout
+        android:id="@+id/container1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <SurfaceView
+            android:id="@+id/decoder_surface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <!-- Floating menu toggle button (bottom-right) -->
+    <Button
+        android:id="@+id/fab_toggle"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/btn_selector"
+        android:text="@string/fab_menu_icon"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:alpha="0.6" />
+
+    <!-- Floating control panel (icon tiles, hidden by default) -->
+    <LinearLayout
+        android:id="@+id/floating_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="68dp"
+        android:background="#E02A2C36"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/fab_screen_off"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/fab_tile_selector"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                android:text="@string/fab_screen_off"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/fab_mute"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/fab_tile_selector"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                android:text="@string/fab_mute_off"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/fab_orientation"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/fab_tile_selector"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                android:text="@string/fab_orientation_auto"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/fab_back"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/fab_tile_selector"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                android:text="@string/fab_back"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/fab_home"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/fab_tile_selector"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                android:text="@string/fab_home"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/fab_appswitch"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/fab_tile_selector"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                android:text="@string/fab_appswitch"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <!-- 切断（2/3幅）とキーパッド（1/3幅）を横並びに置く -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/fab_disconnect"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="2"
+                android:layout_margin="3dp"
+                android:background="@drawable/fab_tile_disconnect_selector"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                android:text="@string/fab_disconnect"
+                android:textColor="#FFFF8080"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/fab_keypad"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:background="@drawable/fab_tile_selector"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                android:text="@string/fab_keypad"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Unlock keypad panel (hidden by default) -->
+    <LinearLayout
+        android:id="@+id/keypad_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="68dp"
+        android:background="#E02A2C36"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/keypad_wake"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="@string/keypad_wake"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/keypad_unlock"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="@string/keypad_unlock"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/keypad_close"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="@string/keypad_close"
+                    android:textColor="#FFF0C0C0"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/keypad_1"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/keypad_2"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="2"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/keypad_3"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="3"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/keypad_4"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="4"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/keypad_5"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="5"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/keypad_6"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="6"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/keypad_7"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/keypad_8"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="8"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/keypad_9"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="9"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/keypad_del"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="@string/keypad_del"
+                    android:textColor="#FFF0C0C0"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/keypad_0"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="0"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/keypad_enter"
+                    android:layout_width="54dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/fab_tile_selector"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="@string/keypad_enter"
+                    android:textColor="#FF80D080"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
