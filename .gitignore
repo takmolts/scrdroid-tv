@@ -14,6 +14,8 @@ local.properties
 # Signing keys (絶対にコミットしない)
 *.jks
 *.keystore
+# 固定のデバッグ署名鍵（秘密情報ではない）はコミットする
+!app/debug.keystore
 keystore.properties
 
 # OS
