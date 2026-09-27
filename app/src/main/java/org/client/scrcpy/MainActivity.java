@@ -969,6 +969,10 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         surfaceView = findViewById(R.id.decoder_surface);
+        // Fire TV はリモコン入力が無いと一定時間でスクリーンセーバー／スリープに入り、
+        // onStop 経由で切断されてしまう。ミラー画面表示中は画面 ON を維持する
+        // (View が外れると自動で解除されるため、切断後はフラグが残らない)
+        surfaceView.setKeepScreenOn(true);
         surface = surfaceView.getHolder().getSurface();
         linearLayout = findViewById(R.id.container1);
 
